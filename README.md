@@ -1,4 +1,4 @@
-# Diabetic Retinopathy Feature Localisationo
+# Diabetic Retinopathy Feature Localisation
 
 The commands here assume you are using Powershell on Windows. Though not
 explicitly tested, the scripts should work on Mac and Linux systems but the
