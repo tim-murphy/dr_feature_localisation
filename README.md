@@ -46,6 +46,9 @@ To extract the arteriole and venule ground truth images, run the following
 two commands:
 
 > `python .\extract_vessels.py "${env:USERPROFILE}\Downloads\AV_groundTruth\training\av" "${env:USERPROFILE}\Downloads\AV_groundTruth\training\images" dataset_av`
+
+and
+
 > `python .\extract_vessels.py "${env:USERPROFILE}\Downloads\AV_groundTruth\test\av"  "${env:USERPROFILE}\Downloads\AV_groundTruth\test\images" dataset_av`
 
 This will put all of the annotations in the *dataset_av* folder.
