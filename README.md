@@ -4,6 +4,11 @@ The commands here assume you are using Powershell on Windows. Though not
 explicitly tested, the scripts should work on Mac and Linux systems but the
 command line syntax may need to be changed.
 
+You will need to install Python 3 to run these commands. To install dependencies,
+run the following command:
+
+> `pip install -r requirements.txt`
+
 ## Data Preparation
 
 This project uses the data from the [DDR](https://github.com/nkicsl/DDR-dataset)
