@@ -4,15 +4,13 @@ The commands here assume you are using Powershell on Windows. Though not
 explicitly tested, the scripts should work on Mac and Linux systems but the
 command line syntax may need to be changed.
 
-Please cite XXX.
-
 ## Data Preparation
 
 This project uses the data from the [DDR](https://github.com/nkicsl/DDR-dataset)
-dataset by Li and colleagues. We need to do some preparation first before we can
+dataset by Li et al. (2019), the [RITE](https://medicine.uiowa.edu/eye/rite-dataset)
+dataset by Hu et al. (2013), and the [IOSTAR](https://www.idiap.ch/software/bob/docs/bob/bob.db.iostar/stable/)
+dataset by Zhang et al (2016). We need to do some preparation first before we can
 do any analysis.
-
-FIXME also RITE and IOSTAR
 
 ### DDR Dataset
 
@@ -29,28 +27,47 @@ subdirectories contain "image" and "label" folders - you may need to rename
 the "label" folder in "valid". Finally, run the following python script,
 assuming the data is in your Downloads folder:
 
-> `python ./extract_dr.py "${USERPROFILE}/Downloads/DDR-dataset" dataset_dr`
+> `python .\extract_dr.py "${env:USERPROFILE}\Downloads\DDR-dataset" dataset_dr`
 
 This will put all of the images and annotations into the *dataset_dr* folder.
 
 ### RITE Dataset
 
-FIXME
-split_image_av.py
+This dataset is downloaded as a single zip file: *AV_groundTruth.zip*. As for
+DDR, I'll assume you've downloaded and unzipped this in your Downloads folder.
+You should now have a folder in your downloads called *AV_groundTruth*.
+
+To extract the arteriole and venule ground truth images, run the following
+two commands:
+
+> `python .\extract_vessels.py "${env:USERPROFILE}\Downloads\AV_groundTruth\training\av" "${env:USERPROFILE}\Downloads\AV_groundTruth\training\images" dataset_av`
+> `python .\extract_vessels.py "${env:USERPROFILE}\Downloads\AV_groundTruth\test\av"  "${env:USERPROFILE}\Downloads\AV_groundTruth\test\images" dataset_av`
+
+This will put all of the annotations in the *dataset_av* folder.
 
 ### IOSTAR Dataset
 
-FIXME
+This dataset is also in a single zip file: *IOSTAR-Vessel-Segmentation-Dataset-2018.zip*.
+Unzip this somewhere, again I'll assume it's in your downloads folder. You
+should now have a folder in your downloads called *IOSTAR-Vessel-Segmentation-Dataset*.
+
+To extract the arteriole and venule ground truth images, run the following
+command:
+
+> `python .\extract_vessels.py "${env:USERPROFILE}\Downloads\IOSTAR Vessel Segmentation Dataset\AV_GT"  "${env:USERPROFILE}\Downloads\IOSTAR Vessel Segmentation Dataset\image" dataset_av`
+
+This will put all of the annotations in the *dataset_av* folder.
 
 ## Additional Annotations
 
-We have created additional annotations for neovascularisation, venous beading,
-and intraretinal microvascular abnormalities. These files are too large to
-include in the repository, so please contact Tim Murphy <tim@murphy.org> for
-access.
+We have created additional annotations for images in the DDR datates for
+neovascularisation, venous beading, and intraretinal microvascular
+abnormalities. These files are too large to include in the repository, so please
+contact Tim Murphy <tim@murphy.org> for access.
 
 Note: this software can be used without these additional annotations if you do
-not want or need them.
+not want or need them. This will generate a lot of warnings about label files
+not existing but these can be ignored.
 
 ## Image Nerve and Fovea Location
 
@@ -66,7 +83,7 @@ anatomical features in each image, which requires manual localisation.
 
 To mark the location of these features, run the following script:
 
-> `foreach ($i in (gci dataset_dr/image/*.jpg)) { python .\image_click.py coordinates_dr.csv $i }`
+> `foreach ($i in (gci dataset_dr\image\*.jpg)) { python .\image_click.py coordinates_dr.csv $i }`
 
 (Note: this needs to be done in a loop as there are too many image files for
 Powershell to handle. This should not be a problem for Mac or Linux users).
@@ -82,13 +99,13 @@ as needed. Images which have already been processed will be skipped.
 
 Repeat the process for the vessels dataset:
 
-> `foreach ($i in (gci dataset_vessels/image/*.jpg)) { python .\image_click.py coordinates_vessels.csv $i }`
+> `foreach ($i in (gci dataset_av\image\*.jpg)) { python .\image_click.py coordinates_av.csv $i }`
 
 ## Heatmap Generation
 
 The following command will convert the ground truth data to heatmaps:
 
-> `python ./create_heatmap.py ./coordinates_dr.csv ./dataset_dr dr`
+> `python .\create_heatmap.py .\coordinates_dr.csv .\dataset_dr dr`
 
 This will extract heatmap data for each feature and store the feature count
 for each pixel location (default canvas size 1100 x 1100) in CSV format in the
@@ -96,7 +113,7 @@ for each pixel location (default canvas size 1100 x 1100) in CSV format in the
 
 Repeat the process for vessels:
 
-> `python ./create_heatmap.py ./coordinates_vessels.csv ./dataset_vessels vessels`
+> `python .\create_heatmap.py .\coordinates_av.csv .\dataset_av vessels`
 
 The raw feature count data can be used by other software to create coloured
 heatmaps or to do other analysis.
