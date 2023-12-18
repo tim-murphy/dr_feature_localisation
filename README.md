@@ -1,5 +1,8 @@
 # Diabetic Retinopathy Feature Localisation
 
+This software is associated with a manuscript which has been submitted for
+publication.
+
 The commands here assume you are using Powershell on Windows. Though not
 explicitly tested, the scripts should work on Mac and Linux systems but the
 command line syntax may need to be changed.
@@ -68,7 +71,7 @@ This will put all of the annotations in the *dataset_av* folder.
 
 ## Additional Annotations
 
-We have created additional annotations for images in the DDR datates for
+We have created additional annotations for images in the DDR dataset for
 neovascularisation, venous beading, and intraretinal microvascular
 abnormalities. These files are too large to include in the repository, so please
 contact Tim Murphy <tim@murphy.org> for access.
