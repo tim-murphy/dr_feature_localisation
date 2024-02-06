@@ -13,7 +13,8 @@ https://www.mdpi.com/2077-0383/13/3/807
       NUMBER = {3},
       ARTICLE-NUMBER = {807},
       URL = {https://www.mdpi.com/2077-0383/13/3/807},
-      ISSN = {2077-0383}
+      ISSN = {2077-0383},
+      DOI = {10.3390/jcm13030807}
     }
 
 The commands here assume you are using Powershell on Windows. Though not
