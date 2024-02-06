@@ -1,7 +1,20 @@
 # Diabetic Retinopathy Feature Localisation
 
-This software is associated with a manuscript which has been submitted for
-publication.
+If you use this software in your research, please cite the following paper:
+
+https://www.mdpi.com/2077-0383/13/3/807
+
+    @Article{murphy2024,
+      AUTHOR = {Murphy, Timothy I. and Douglass, Amanda G. and van Wijngaarden, Peter and Armitage, James A.},
+      TITLE = {Programmatically Localizing Diabetic Retinopathy Features in 45-Degree Retinal Photographs Using Anatomical Colocation},
+      JOURNAL = {Journal of Clinical Medicine},
+      VOLUME = {13},
+      YEAR = {2024},
+      NUMBER = {3},
+      ARTICLE-NUMBER = {807},
+      URL = {https://www.mdpi.com/2077-0383/13/3/807},
+      ISSN = {2077-0383}
+    }
 
 The commands here assume you are using Powershell on Windows. Though not
 explicitly tested, the scripts should work on Mac and Linux systems but the
